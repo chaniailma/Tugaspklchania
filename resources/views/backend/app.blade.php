@@ -60,5 +60,8 @@
 <script src="{{ url ('backend/assets/js/kaiadmin.min.js')}}"></script>
 <!-- Kaiadmin DEMO methods, don't include it in your project! -->
 <script src="{{ url ('backend/assets/js/setting-demo2.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@yield('script')
 </body>
 </html>
