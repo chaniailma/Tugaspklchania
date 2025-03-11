@@ -7,18 +7,20 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Jalankan migrasi.
      */
     public function up(): void
     {
-        Schema::create('teacher', function (Blueprint $table) {
+        Schema::create('teachers', function (Blueprint $table) { 
             $table->id(); // Primary key
             $table->string('name');
-            $table->string('email'); // Email harus unik
-            $table->string('phone');
-            $table->string('address');
-            $table->enum('gender', ['male', 'female']); // Menggunakan ENUM
-            $table->enum('status', ['active', 'inactive'])->default('active'); // ENUM dengan default value
+            $table->string('email')->unique(); // Email harus unik
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->enum('gender', ['male', 'female']);
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('photo')->nullable(); // Menyimpan path foto
+            $table->text('detail')->nullable(); // Informasi tambahan tentang guru
             $table->timestamps(); // created_at, updated_at
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teacher');
+        Schema::dropIfExists('teachers');
     }
 };

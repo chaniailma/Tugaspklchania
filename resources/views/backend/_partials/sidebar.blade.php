@@ -42,6 +42,20 @@
                   <span class="badge badge-success"></span>
                 </a>
               </li>
+              <li class="nav-item {{ Request::is('students*') ? 'active' : '' }}">
+                <a href="{{ route ('students') }}">
+                  <i class="fas fa-students"></i>
+                  <p>Data Siswa</p>
+                  <span class="badge badge-success"></span>
+                </a>
+              </li>
+              <li class="nav-item {{ Request::is('Teachers*') ? 'active' : '' }}">
+                <a href="{{ route ('teachers') }}">
+                  <i class="fas fa-teachers"></i>
+                  <p>Teachers</p>
+                  <span class="badge badge-success"></span>
+                </a>
+              </li>
 
               <li class="nav-item">
                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

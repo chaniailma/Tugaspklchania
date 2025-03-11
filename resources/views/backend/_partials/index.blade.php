@@ -35,8 +35,8 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="card-title">Data User</div>
-                <a href="{{ route('user.create') }}" class="btn btn-success">Tambah</a>
+                <div class="card-title">Data Siswa</div>
+                <a href="{{ route('students.create') }}" class="btn btn-success">Tambah</a>
             </div>
         </div>
         <div class="card-body">
@@ -57,8 +57,8 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form id="delete-form-{{ $user->id }}" action="{{ route('user.delete', $user->id) }}" method="POST" class="d-inline">
+                            <a href="{{ route('students.edit', $students->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form id="delete-form-{{ $students->id }}" action="{{ route('students.delete', $user->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $user->id }})">Hapus</button>
