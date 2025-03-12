@@ -39,6 +39,12 @@
                 <a href="{{ route('user.create') }}" class="btn btn-success">Tambah</a>
             </div>
         </div>
+        <form method="GET" action="{{ route('user') }}" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Cari Nama atau Email..." value="{{ request('search') }}">
+            <button type="submit" class="btn btn-primary">Cari</button>
+        </div>
+    </form>
         <div class="card-body">
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
             <table class="table table-head-bg-success table-hover">
@@ -68,6 +74,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $users->links() }}
         </div>
     </div>
 </div>

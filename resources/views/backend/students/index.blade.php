@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
     <div class="page-inner">
         <div class="page-header">
             <h3 class="fw-bold mb-3">Tables</h3>
@@ -37,9 +37,16 @@
                 <a href="{{ route('students.create') }}" class="btn btn-success">Tambah</a>
             </div>
         </div>
+        <form method="GET" action="{{ route('students') }}" class="mt-3">
+    <div class="input-group">
+        <input type="text" name="search" class="form-control" placeholder="Cari Nama atau Email..." value="{{ request('search') }}">
+        <button type="submit" class="btn btn-primary">Cari</button>
+    </div>
+</form>
 
         <!-- Tambahkan div agar tabel bisa discroll -->
-        <div class="card-body" style="max-height: 70vh; overflow-y: auto;">
+        <div class="card-body">
+        <div class= "table-responsive" style="max-height: 70vh; overflow-y: auto;">
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
             <table class="table table-head-bg-success table-hover">
                 <thead class="sticky-top bg-white">
@@ -86,6 +93,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $students->links() }}
         </div> <!-- End Scrollable Card Body -->
     </div>
 </div>

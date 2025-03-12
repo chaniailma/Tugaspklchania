@@ -5,10 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Students; // Import Model Student
+use DataTables;
 
 class StudentsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+
+        $students = Students::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%")
+                             ->orWhere('email', 'like', "%{$search}%");
+            })
+            ->paginate(3);
+
+        return view('backend.students.index', compact('students', 'search'));
+    }
+
+    public function getALLStudents()
     {
         $students = Students::all(); // Menggunakan Eloquent
         return view('backend.students.index', compact('students'));
@@ -23,14 +38,14 @@ class StudentsController extends Controller
     {
         // Validasi form
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:students',
-            'phone' => 'required',
-            'class' => 'required',
+            'name'   => 'required',
+            'email'  => 'required|email|unique:students',
+            'phone'  => 'required',
+            'class'  => 'required',
             'address' => 'required',
-            'gender' => 'required',
-            'status' => 'required',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gender'  => 'required',
+            'status'  => 'required',
+            'photo'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $photoPath = null;
@@ -43,14 +58,14 @@ class StudentsController extends Controller
 
         // Insert ke database menggunakan Eloquent
         Students::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'class' => $request->class,
+            'name'    => $request->name,
+            'email'   => $request->email,
+            'phone'   => $request->phone,
+            'class'   => $request->class,
             'address' => $request->address,
-            'gender' => $request->gender,
-            'status' => $request->status,
-            'photo' => $photoPath,
+            'gender'  => $request->gender,
+            'status'  => $request->status,
+            'photo'   => $photoPath,
         ]);
 
         return redirect()->route('students')->with('success', 'Data siswa berhasil ditambahkan');
@@ -66,14 +81,14 @@ class StudentsController extends Controller
     {
         // Validasi input
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:students,email,' . $id,
-            'phone' => 'required',
-            'class' => 'required',
+            'name'   => 'required',
+            'email'  => 'required|email|unique:students,email,' . $id,
+            'phone'  => 'required',
+            'class'  => 'required',
             'address' => 'required',
-            'gender' => 'required',
-            'status' => 'required',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gender'  => 'required',
+            'status'  => 'required',
+            'photo'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $student = Students::findOrFail($id);
@@ -93,14 +108,14 @@ class StudentsController extends Controller
 
         // Update data siswa
         $student->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'class' => $request->class,
+            'name'    => $request->name,
+            'email'   => $request->email,
+            'phone'   => $request->phone,
+            'class'   => $request->class,
             'address' => $request->address,
-            'gender' => $request->gender,
-            'status' => $request->status,
-            'photo' => $photoPath,
+            'gender'  => $request->gender,
+            'status'  => $request->status,
+            'photo'   => $photoPath,
         ]);
 
         return redirect()->route('students')->with('success', 'Data siswa berhasil diperbarui');

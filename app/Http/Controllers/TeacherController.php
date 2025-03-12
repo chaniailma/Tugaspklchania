@@ -9,15 +9,28 @@ use Illuminate\Support\Facades\DB;
 
 class TeacherController extends Controller
 {
+    public function index(Request $request)
+{
+    $search = $request->input('search');
+
+    $teachers = Teacher::query()
+        ->when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%")
+                         ->orWhere('email', 'like', "%{$search}%");
+        })
+        ->paginate(3);
+
+    return view('backend.teachers.index', compact('teachers', 'search'));
+}
+
     /**
      * Menampilkan daftar guru.
      */
-    public function index()
+    public function getAllTeacher()
     {
-        $teachers = Teacher::latest()->paginate(10);
+        $students = Teacher::all();
         return view('backend.teachers.index', compact('teachers'));
     }
-
     /**
      * Menampilkan form tambah guru.
      */

@@ -11,6 +11,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -32,6 +34,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/students/{id}/edit', [StudentsController::class, 'edit'])->name('students.edit');
         Route::put('/{id}', [StudentsController::class, 'update'])->name('students.update');
         Route::delete('/{id}', [StudentsController::class, 'delete'])->name('students.delete');
+        Route::get('/students/{id}', [StudentsController::class, 'show'])->name('students.show');
+        Route::get('/students-data', [StudentsController::class, 'getStudentsData'])->name('students.get');
+
     });
     
 
