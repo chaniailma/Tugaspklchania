@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Students; // Import Model Student
+use App\http\Requests\StoreStudentRequest;
 use DataTables;
+use Illuminate\Support\Facades\DB;
 
 class StudentsController extends Controller
 {
@@ -34,19 +36,9 @@ class StudentsController extends Controller
         return view('backend.students.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
-        // Validasi form
-        $request->validate([
-            'name'   => 'required',
-            'email'  => 'required|email|unique:students',
-            'phone'  => 'required',
-            'class'  => 'required',
-            'address' => 'required',
-            'gender'  => 'required',
-            'status'  => 'required',
-            'photo'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        
 
         $photoPath = null;
 
@@ -56,7 +48,7 @@ class StudentsController extends Controller
             $photoPath = 'photos/' . $photoName;
         }
 
-        // Insert ke database menggunakan Eloquent
+        //Insert ke database menggunakan Eloquent
         Students::create([
             'name'    => $request->name,
             'email'   => $request->email,
@@ -70,6 +62,19 @@ class StudentsController extends Controller
 
         return redirect()->route('students')->with('success', 'Data siswa berhasil ditambahkan');
     }
+
+    
+    public function show($id)
+    {
+        $teacher = DB::table('students')->where('id', $id)->first();
+
+        if (!$teacher) {
+            return redirect()->route('students')->with('error', 'Data tidak ditemukan');
+        }
+
+        return view('backend.students.show', compact('student'));
+    }
+
 
     public function edit($id)
     {

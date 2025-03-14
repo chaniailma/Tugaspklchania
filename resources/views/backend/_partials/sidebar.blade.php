@@ -44,18 +44,27 @@
               </li>
               <li class="nav-item {{ Request::is('students*') ? 'active' : '' }}">
                 <a href="{{ route ('students') }}">
-                  <i class="fas fa-students"></i>
+                  <i class="fas fa-user-graduate"></i>
                   <p>Data Siswa</p>
                   <span class="badge badge-success"></span>
                 </a>
               </li>
               <li class="nav-item {{ Request::is('Teachers*') ? 'active' : '' }}">
                 <a href="{{ route ('teachers') }}">
-                  <i class="fas fa-teachers"></i>
+                  <i class="fas fa-chalkboard-teacher"></i>
                   <p>Teachers</p>
                   <span class="badge badge-success"></span>
                 </a>
               </li>
+
+              <li class="nav-item {{ Request::is('mapel*') ? 'active' : '' }}">
+                <a href="{{ route ('mapel') }}">
+                  <i class="fas fa-book"></i>
+                  <p>Data Mata Pelajaran</p>
+                  <span class="badge badge-success"></span>
+                </a>
+              </li>
+
 
               <li class="nav-item">
                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

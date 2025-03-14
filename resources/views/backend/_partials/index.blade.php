@@ -61,7 +61,7 @@
                             <form id="delete-form-{{ $students->id }}" action="{{ route('students.delete', $user->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $user->id }})">Hapus</button>
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $user->id }}')">Hapus</button>
                                                 </form>
                         </td>
                     </tr>

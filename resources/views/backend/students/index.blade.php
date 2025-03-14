@@ -39,7 +39,7 @@
         </div>
         <form method="GET" action="{{ route('students') }}" class="mt-3">
     <div class="input-group">
-        <input type="text" name="search" class="form-control" placeholder="Cari Nama atau Email..." value="{{ request('search') }}">
+        <input type="search" name="search" class="form-control" placeholder="Cari Nama atau Email..." value="{{ request('search') }}">
         <button type="submit" class="btn btn-primary">Cari</button>
     </div>
 </form>
@@ -86,7 +86,7 @@
                             <form id="delete-form-{{ $student->id }}" action="{{ route('students.delete', $student->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $student->id }})">Hapus</button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $student->id }}')">Hapus</button>
                             </form>
                         </td>
                     </tr>

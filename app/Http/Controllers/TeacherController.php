@@ -16,7 +16,8 @@ class TeacherController extends Controller
     $teachers = Teacher::query()
         ->when($search, function ($query, $search) {
             return $query->where('name', 'like', "%{$search}%")
-                         ->orWhere('email', 'like', "%{$search}%");
+                         ->orWhere('email', 'like', "%{$search}%")
+                         ->orWhere('address', 'like', "%{$search}%");
         })
         ->paginate(3);
 
@@ -52,7 +53,6 @@ class TeacherController extends Controller
             'gender' => 'required|in:male,female',
             'status' => 'required|in:active,inactive',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'detail' => 'nullable|string',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -72,7 +72,7 @@ class TeacherController extends Controller
             'gender' => $request->gender,
             'status' => $request->status,
             'photo' => $photoPath, // Simpan path relatif
-            'detail' => $request->detail,
+         
         ]);
         
 

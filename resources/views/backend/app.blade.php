@@ -44,6 +44,7 @@
   <body>
     <div class="wrapper">
         @include('backend._partials.sidebar')
+        <div class="main-panel">
         @include('backend._partials.header')
         @yield('content')
         @include('backend._partials.footer')

@@ -20,7 +20,7 @@
                             <div class="form-group">
                                 <label for="name">Nama</label>
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" 
-                                       name="name" value="{{ old('name') }}" required>
+                                       name="name" value="{{ old('name') }}" >
                                 @error('name')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" 
-                                       name="email" value="{{ old('email') }}" required>
+                                       name="email" value="{{ old('email') }}" >
                                 @error('email')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label for="phone">No. Telepon</label>
                                 <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" 
-                                       name="phone" value="{{ old('phone') }}" required>
+                                       name="phone" value="{{ old('phone') }}">
                                 @error('phone')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -56,7 +56,7 @@
                             <div class="form-group">
                                 <label for="class">Kelas</label>
                                 <input id="class" type="text" class="form-control @error('class') is-invalid @enderror" 
-                                       name="class" value="{{ old('class') }}" required>
+                                       name="class" value="{{ old('class') }}">
                                 @error('class')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -68,7 +68,7 @@
                             <div class="form-group">
                                 <label for="address">Alamat</label>
                                 <textarea id="address" class="form-control @error('address') is-invalid @enderror" 
-                                          name="address" rows="2" required>{{ old('address') }}</textarea>
+                                          name="address" rows="2">{{ old('address') }}</textarea>
                                 @error('address')
                                     <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -79,7 +79,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="gender">Jenis Kelamin</label>
-                                <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender" required>
+                                <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender" >
                                     <option value="">Pilih Jenis Kelamin</option>
                                     <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Laki-laki</option>
                                     <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Perempuan</option>
@@ -94,7 +94,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="status">Status</label>
-                                <select id="status" class="form-control @error('status') is-invalid @enderror" name="status" required>
+                                <select id="status" class="form-control @error('status') is-invalid @enderror" name="status">
                                     <option value="">Pilih Status</option>
                                     <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Aktif</option>
                                     <option value="inactive" {{ old('status') == 'inactive' ? 'selected' : '' }}>Tidak Aktif</option>

@@ -40,13 +40,13 @@
             </div>
         </div>
         <form method="GET" action="{{ route('user') }}" class="mb-3">
-        <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Cari Nama atau Email..." value="{{ request('search') }}">
-            <button type="submit" class="btn btn-primary">Cari</button>
-        </div>
-    </form>
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Cari Nama atau Email..." value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
+        </form>
         <div class="card-body">
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <table class="table table-head-bg-success table-hover">
                 <thead>
                     <tr>
@@ -65,10 +65,10 @@
                         <td>
                             <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form id="delete-form-{{ $user->id }}" action="{{ route('user.delete', $user->id) }}" method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete({{ $user->id }})">Hapus</button>
-                                                </form>
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ $user->id }}')">Hapus</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -81,33 +81,33 @@
 
 @endsection
 @section('script')
-    <script>
-        function confirmDelete(userId) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "User akan dihapus secara permanen!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Ya, Hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('delete-form-' + userId).submit();
-                }
-            })
-        }
-    </script>
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: "{{ session('success') }}",
-                showConfirmButton: false,
-                timer: 2000
-            });
-        </script>
-    @endif
+<script>
+    function confirmDelete(userId) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "User akan dihapus secara permanen!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('delete-form-' + userId).submit();
+            }
+        })
+    }
+</script>
+@if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: "{{ session('success') }}",
+        showConfirmButton: false,
+        timer: 2000
+    });
+</script>
+@endif
 @endsection
