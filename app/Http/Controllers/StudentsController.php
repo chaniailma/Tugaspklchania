@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Students; // Import Model Student
+use App\Models\Student; // Import Model Student
 use App\http\Requests\StoreStudentRequest;
 use DataTables;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +15,7 @@ class StudentsController extends Controller
     {
         $search = $request->input('search');
 
-        $students = Students::query()
+        $students = Student::query()
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'like', "%{$search}%")
                              ->orWhere('email', 'like', "%{$search}%");
@@ -27,7 +27,7 @@ class StudentsController extends Controller
 
     public function getALLStudents()
     {
-        $students = Students::all(); // Menggunakan Eloquent
+        $students = Student::all(); // Menggunakan Eloquent
         return view('backend.students.index', compact('students'));
     }
 
@@ -49,7 +49,7 @@ class StudentsController extends Controller
         }
 
         //Insert ke database menggunakan Eloquent
-        Students::create([
+        Student::create([
             'name'    => $request->name,
             'email'   => $request->email,
             'phone'   => $request->phone,
@@ -78,7 +78,7 @@ class StudentsController extends Controller
 
     public function edit($id)
     {
-        $student = Students::findOrFail($id);
+        $student = Student::findOrFail($id);
         return view('backend.students.edit', compact('student'));
     }
 
@@ -96,7 +96,7 @@ class StudentsController extends Controller
             'photo'   => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $student = Students::findOrFail($id);
+        $student = Student::findOrFail($id);
         $photoPath = $student->photo; // Gunakan foto lama jika tidak ada yang baru
 
         // Jika ada foto baru, hapus foto lama dan simpan yang baru
@@ -128,7 +128,7 @@ class StudentsController extends Controller
 
     public function delete($id)
     {
-        $student = Students::findOrFail($id);
+        $student = Student::findOrFail($id);
 
         // Hapus foto jika ada dan bukan default
         if ($student->photo && file_exists(public_path($student->photo))) {

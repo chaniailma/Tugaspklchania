@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\NilaiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +17,17 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::prefix('nilai')->group(function () {
+        Route::get('/', [NilaiController::class, 'index'])->name('nilai');
+        Route::get('/create', [NilaiController::class, 'create'])->name('nilai.create');
+        Route::get('/nilai/{id}/edit', [NilaiController::class, 'edit'])->name('nilai.edit');
+        Route::post('/nilai', [NilaiController::class, 'store'])->name('nilai.store');
+        Route::put('/{id}', [NilaiController::class, 'update'])->name('nilai.update');
+        Route::delete('/{id}', [NilaiController::class, 'destroy'])->name('nilai.destroy');
+
+        
+    });
 
     Route::prefix('mapel')->group(function () {
         Route::get('/', [MapelController::class, 'index'])->name('mapel');

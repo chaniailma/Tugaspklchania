@@ -65,6 +65,14 @@
                 </a>
               </li>
 
+              <li class="nav-item {{ Request::is('nilai*') ? 'active' : '' }}">
+                <a href="{{ route ('nilai') }}">
+                  <i class="fas fa-clipboard-list"></i>
+                  <p>Data Nilai</p>
+                  <span class="badge badge-success"></span>
+                </a>
+              </li>
+
 
               <li class="nav-item">
                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
