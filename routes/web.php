@@ -7,9 +7,10 @@ use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/', function () {   
     return view('welcome');
 });
 
@@ -73,6 +74,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('user.delete'); // Menggunakan `destroy` bukan `delete`
     });
 
+        //pdf
+        Route::get('/nilai/export-pdf', [PdfController::class, 'exportPdf'])->name('nilai.export-pdf');
     // Routes untuk Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

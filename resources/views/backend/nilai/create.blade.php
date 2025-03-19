@@ -8,7 +8,7 @@
         @csrf
         <div class="mb-3">
             <label>Mata Pelajaran</label>
-            <select name="mapels_id" class="form-control" required>
+            <select name="mapels_id" class="form-control select2" required>
                 @foreach($mapel as $m) 
                     <option value="{{ $m->id }}">{{ $m->nama }}</option>
                 @endforeach
@@ -16,7 +16,7 @@
         </div>
         <div class="mb-3">
             <label>Nama student</label>
-            <select name="students_id" class="form-control" required>
+            <select name="students_id" class="form-control select2" required>
                 @foreach($students as $s)
                     <option value="{{ $s->id }}">{{ $s->name }}</option>
                 @endforeach
@@ -24,7 +24,7 @@
         </div>
         <div class="mb-3">
             <label>Nama guru</label>
-            <select name="teachers_id" class="form-control" required>
+            <select name="teachers_id" class="form-control select2" required>
                 @foreach($teachers as $t)
                     <option value="{{ $t->id }}">{{ $t->name }}</option>
                 @endforeach
@@ -41,3 +41,15 @@
 </div>
 @endsection
 
+@section('script')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({
+                placeholder: "Pilih opsi",
+                allowClear: true
+            });
+        });
+    </script>
+@endsection

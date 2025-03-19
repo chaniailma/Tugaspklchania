@@ -5,7 +5,8 @@
     <div class="page-inner">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="card-title">Edit Nilai</h4>
+                <h4 class="card-title">Edit Nilai
+                </h4>
                 <a href="{{ route('teachers') }}" class="btn btn-info btn-sm">Kembali</a>
             </div>
 
@@ -16,7 +17,7 @@
 
                     <div class="mb-3">
                         <label for="mapels_id" class="form-label">Mata Pelajaran</label>
-                        <select name="mapel_id" id="mapels_id" class="form-control" required>
+                        <select name="mapel_id" id="mapels_id" class="form-control select2" required>
                             <option value="" disabled>Pilih Mata Pelajaran</option>
                             @foreach($mapel as $m)
                             <option value="{{ $m->id }}" {{ $nilai->mapel_id == $m->id ? 'selected' : '' }}>
@@ -28,7 +29,7 @@
 
                     <div class="mb-3">
                         <label for="teachers_id" class="form-label">Guru</label>
-                        <select name="teacher_id" id="teachers_id" class="form-control" required>
+                        <select name="teacher_id" id="teachers_id" class="form-control select2" required>
                             <option value="" disabled>Pilih Guru</option>
                             @foreach($teachers as $t)
                             <option value="{{ $t->id }}" {{ $nilai->teacher_id == $t->id ? 'selected' : '' }}>
@@ -40,7 +41,7 @@
 
                     <div class="mb-3">
                         <label for="students_id" class="form-label">Nama Siswa</label>
-                        <select name="student_id" id="students_id" class="form-control" required>
+                        <select name="student_id" id="students_id" class="form-control select2" required>
                             <option value="" disabled>Pilih Nama Siswa</option>
                             @foreach($students as $s)
                             <option value="{{ $s->id }}" {{ $nilai->student_id == $s->id ? 'selected' : '' }}>
@@ -64,4 +65,17 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.select2').select2({
+                placeholder: "Pilih opsi",
+                allowClear: true
+            });
+        });
+    </script>
 @endsection

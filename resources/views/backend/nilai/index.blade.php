@@ -17,6 +17,7 @@
 
     <div class="card">
         <div class="card-body">
+        <a href="{{ route('nilai.export-pdf') }}" class="btn btn-danger">Export PDF</a>
             <h3 class="fw-bold mb-3">Daftar Nilai</h3>
 
             {{-- Tampilkan Notifikasi Jika Berhasil Menghapus --}}
