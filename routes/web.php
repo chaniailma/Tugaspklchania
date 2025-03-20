@@ -8,11 +8,17 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\PendaftaranController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {   
     return view('welcome');
+    
 });
+
+//==================== Pendaftaran (Bisa Diakses Tanpa Login) ====================
+Route::get('/pendaftaran/create', [PendaftaranController::class, 'create'])->name('pendaftaran.create'); // Form Pendaftaran
+Route::post('/pendaftaran/store', [PendaftaranController::class, 'store'])->name('pendaftaran.store'); // Simpan Pendaftaran
 
 
 
@@ -29,6 +35,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         
     });
+
+    Route::get('/pendaftaran', [PendaftaranController::class, 'index'])->name('pendaftaran');
+Route::get('/pendaftaran/{id}/edit', [PendaftaranController::class, 'edit'])->name('pendaftaran.edit');
+Route::put('/pendaftaran/{id}', [PendaftaranController::class, 'update'])->name('pendaftaran.update');
+Route::delete('/pendaftaran/{id}', [PendaftaranController::class, 'destroy'])->name('pendaftaran.destroy');
+Route::get('/pendaftaran/{id}', [PendaftaranController::class, 'show'])->name('pendaftaran.show');
 
     Route::prefix('mapel')->group(function () {
         Route::get('/', [MapelController::class, 'index'])->name('mapel');

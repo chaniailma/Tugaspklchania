@@ -70,6 +70,13 @@
                         <span class="badge badge-success"></span>
                     </a>
                 </li>
+                <li class="nav-item {{ request()->is('pendaftaran*') ? 'active' : '' }}">
+                    <a href="{{ route('pendaftaran') }}">
+                        <i class="fas fa-clipboard-list"></i>
+                        <p>Data Pendaftaran</p>
+                        <span class="badge badge-success"></span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" 
