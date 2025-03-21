@@ -39,11 +39,7 @@
                             <th>Jenis Kelamin</th>
                             <th>Asal Sekolah</th>
                             <th>No HP</th>
-                            <!-- <th>Nama Ayah</th>
-                            <th>Nama Ibu</th>
-                            <th>Email</th>
-                            <th>Jurusan</th>
-                            <th>Status</th> -->
+                            <th>Status</th>  <!-- Tambahkan kolom status -->
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -67,49 +63,29 @@
             serverSide: true,
             ajax: "{{ route('pendaftaran') }}",
             dom: '<"top d-flex justify-content-between mb-3"lf>rt<"bottom"ip><"clear">',
-            columns: [{
-                    data: null,
-                    render: (data, type, row, meta) => meta.row + 1
+            columns: [
+                { data: null, render: (data, type, row, meta) => meta.row + 1 },
+                { data: 'nama_lengkap', name: 'nama_lengkap' },
+                { data: 'nisn', name: 'nisn' },
+                { data: 'tempat_lahir', name: 'tempat_lahir' },
+                { data: 'tanggal_lahir', name: 'tanggal_lahir' },
+                { data: 'jenis_kelamin', name: 'jenis_kelamin' },
+                { data: 'asal_sekolah', name: 'asal_sekolah' },
+                { data: 'nomor_hp', name: 'nomor_hp' },
+                { 
+                    data: 'status',
+                    name: 'status',
+                    render: function(data) {
+                        if (data === 'diterima') {
+                            return '<span class="badge bg-success">Diterima</span>';
+                        } else if (data === 'ditolak') {
+                            return '<span class="badge bg-danger">Ditolak</span>';
+                        } else {
+                            return '<span class="badge bg-secondary">Menunggu</span>';
+                        }
+                    }
                 },
-                {
-                    data: 'nama_lengkap',
-                    name: 'nama_lengkap'
-                },
-                {
-                    data: 'nisn',
-                    name: 'nisn'
-                },
-                {
-                    data: 'tempat_lahir',
-                    name: 'tempat_lahir'
-                },
-                {
-                    data: 'tanggal_lahir',
-                    name: 'tanggal_lahir'
-                },
-                {
-                    data: 'jenis_kelamin',
-                    name: 'jenis_kelamin'
-                },
-                {
-                    data: 'asal_sekolah',
-                    name: 'asal_sekolah'
-                },
-                {
-                    data: 'nomor_hp',
-                    name: 'nomor_hp'
-                },
-                // { data: 'nama_ayah', name: 'nama_ayah' },
-                // { data: 'nama_ibu', name: 'nama_ibu' },
-                // { data: 'alamat_email', name: 'alamat_email' },
-                // { data: 'jurusan_pertama', name: 'jurusan_pertama' },
-                // { data: 'status', name: 'status' },
-                {
-                    data: 'aksi',
-                    name: 'aksi',
-                    orderable: false,
-                    searchable: false
-                }
+                { data: 'aksi', name: 'aksi', orderable: false, searchable: false }
             ]
         });
     });

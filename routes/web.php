@@ -41,6 +41,8 @@ Route::get('/pendaftaran/{id}/edit', [PendaftaranController::class, 'edit'])->na
 Route::put('/pendaftaran/{id}', [PendaftaranController::class, 'update'])->name('pendaftaran.update');
 Route::delete('/pendaftaran/{id}', [PendaftaranController::class, 'destroy'])->name('pendaftaran.destroy');
 Route::get('/pendaftaran/{id}', [PendaftaranController::class, 'show'])->name('pendaftaran.show');
+Route::put('/pendaftaran/{id}/updatestatus', [PendaftaranController::class, 'updateStatus'])->name('pendaftaran.updatestatus');
+
 
     Route::prefix('mapel')->group(function () {
         Route::get('/', [MapelController::class, 'index'])->name('mapel');

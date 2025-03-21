@@ -49,7 +49,6 @@
                     <td>{{ $pendaftaran->tempat_lahir }}</td>
                 </tr>
                 <tr>
-                    
                     <th>Tanggal Lahir</th>
                     <td>{{ $pendaftaran->tanggal_lahir }}</td>
                 </tr>
@@ -83,9 +82,42 @@
                 </tr>
                 <tr>
                     <th>Status</th>
-                    <td>{{ ucfirst($pendaftaran->status) }}</td>
+                    <td>
+                        <span class="badge bg-primary">{{ ucfirst($pendaftaran->status) }}</span>
+                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#statusModal">Ubah</button>
+                    </td>
                 </tr>
             </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="statusModalLabel">Ubah Status Pendaftaran</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('pendaftaran.updatestatus', $pendaftaran->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')  <!-- Tambahkan method PUT untuk update -->
+
+                    <label for="status" class="form-label">Pilih Status</label>
+                    <select class="form-control" name="status" id="status">
+                        <option value="diterima" {{ $pendaftaran->status == 'diterima' ? 'selected' : '' }}>Diterima</option>
+                        <option value="ditolak" {{ $pendaftaran->status == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+                    </select>
+
+                    <!-- Tombol Simpan -->
+                    <div class="mt-3 d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

@@ -102,6 +102,15 @@ class PendaftaranController extends Controller
     return view('backend.pendaftaran.show', compact('pendaftaran'));
 }
 
+public function updateStatus(Request $request, $id)
+{
+    $pendaftaran = Pendaftaran::findOrFail($id);
+    $pendaftaran->status = $request->status;
+    $pendaftaran->save();
+
+    return redirect()->back()->with('success', 'Status berhasil diperbarui');
+}
+
 
     public function delete($id)
     {
