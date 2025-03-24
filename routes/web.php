@@ -19,6 +19,7 @@ Route::get('/', function () {
 //==================== Pendaftaran (Bisa Diakses Tanpa Login) ====================
 Route::get('/pendaftaran/create', [PendaftaranController::class, 'create'])->name('pendaftaran.create'); // Form Pendaftaran
 Route::post('/pendaftaran/store', [PendaftaranController::class, 'store'])->name('pendaftaran.store'); // Simpan Pendaftaran
+Route::get('/pendaftaran/search', [PendaftaranController::class, 'search'])->name('pendaftaran.search');
 
 
 
@@ -42,6 +43,8 @@ Route::put('/pendaftaran/{id}', [PendaftaranController::class, 'update'])->name(
 Route::delete('/pendaftaran/{id}', [PendaftaranController::class, 'destroy'])->name('pendaftaran.destroy');
 Route::get('/pendaftaran/{id}', [PendaftaranController::class, 'show'])->name('pendaftaran.show');
 Route::put('/pendaftaran/{id}/updatestatus', [PendaftaranController::class, 'updateStatus'])->name('pendaftaran.updatestatus');
+Route::get('/pendaftaran/{id}/download', [PendaftaranController::class, 'downloadPdf'])->name('pendaftaran.download');
+
 
 
     Route::prefix('mapel')->group(function () {

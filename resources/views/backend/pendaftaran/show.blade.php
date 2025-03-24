@@ -87,12 +87,23 @@
                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#statusModal">Ubah</button>
                     </td>
                 </tr>
+
+                <!-- Jika statusnya diterima, tampilkan bukti pendaftaran -->
+                @if(strtolower($pendaftaran->status) == 'diterima' && $pendaftaran->bukti_pendaftaran)
+                @endif
             </table>
+
+            <!-- Tombol Download PDF jika status diterima -->
+            @if(strtolower($pendaftaran->status) == 'diterima')
+                <a href="{{ route('pendaftaran.download', $pendaftaran->id) }}" class="btn btn-success">
+                    <i class="icon-file"></i> Download PDF
+                </a>
+            @endif
         </div>
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Ubah Status -->
 <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -103,15 +114,14 @@
             <div class="modal-body">
                 <form action="{{ route('pendaftaran.updatestatus', $pendaftaran->id) }}" method="POST">
                     @csrf
-                    @method('PUT')  <!-- Tambahkan method PUT untuk update -->
+                    @method('PUT')
 
                     <label for="status" class="form-label">Pilih Status</label>
                     <select class="form-control" name="status" id="status">
-                        <option value="diterima" {{ $pendaftaran->status == 'diterima' ? 'selected' : '' }}>Diterima</option>
-                        <option value="ditolak" {{ $pendaftaran->status == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
+                        <option value="diterima" {{ strtolower($pendaftaran->status) == 'diterima' ? 'selected' : '' }}>Diterima</option>
+                        <option value="ditolak" {{ strtolower($pendaftaran->status) == 'ditolak' ? 'selected' : '' }}>Ditolak</option>
                     </select>
 
-                    <!-- Tombol Simpan -->
                     <div class="mt-3 d-flex justify-content-end">
                         <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -121,4 +131,5 @@
         </div>
     </div>
 </div>
+
 @endsection

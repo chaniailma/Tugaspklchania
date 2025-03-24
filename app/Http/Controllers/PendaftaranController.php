@@ -120,6 +120,29 @@ public function updateStatus(Request $request, $id)
         return redirect()->route('pendaftaran')->with('success', 'Data pendaftaran berhasil dihapus.');
     }
 
+    public function search(Request $request)
+    {
+        $request->validate([
+            'nisn' => 'required|numeric'
+        ]);
+    
+        $pendaftaran = Pendaftaran::where('nisn', $request->nisn)->first();
+    
+        if (!$pendaftaran) {
+            return redirect()->back()->with('error', 'NISN tidak ditemukan.');
+        }
+    
+        return view('backend.pendaftaran.status', compact('pendaftaran'));
+    }
+    public function downloadPdf($id)
+{
+    $pendaftaran = Pendaftaran::findOrFail($id);
+    
+    $pdf = Pdf::loadView('backend.pendaftaran.export_pdf', compact('pendaftaran'));
+    
+    return $pdf->download('formulir_pendaftaran.pdf');
+}
+    
     public function exportPDF()
     {
         $pendaftaran = Pendaftaran::all();
